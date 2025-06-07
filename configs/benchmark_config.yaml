@@ -1,0 +1,83 @@
+# Configuraciones base para benchmarking
+
+# =========================
+#   SPARK - SILVER LEVEL
+# =========================
+C1:
+  step_name: silver_etl
+  framework: spark
+  operation_type: silver
+  dataset_name: yellow_tripdata
+  num_workers: 2
+  cores_per_worker: 2
+  ram_per_worker_gb: 8
+  notes: Configuración base C1 para Spark
+
+C2:
+  step_name: silver_etl
+  framework: spark
+  operation_type: silver
+  dataset_name: yellow_tripdata
+  num_workers: 4
+  cores_per_worker: 2
+  ram_per_worker_gb: 8
+  notes: Escalado horizontal Spark
+
+C3:
+  step_name: silver_etl
+  framework: spark
+  operation_type: silver
+  dataset_name: yellow_tripdata
+  num_workers: 4
+  cores_per_worker: 2
+  ram_per_worker_gb: 4
+  notes: RAM reducida por nodo
+
+C4:
+  step_name: silver_etl
+  framework: spark
+  operation_type: silver
+  dataset_name: yellow_tripdata
+  num_workers: 2
+  cores_per_worker: 2
+  ram_per_worker_gb: 16
+  notes: Escalado vertical
+
+# =========================
+#   RAY - SILVER LEVEL
+# =========================
+C1_ray:
+  step_name: silver_etl
+  framework: ray
+  operation_type: silver
+  dataset_name: yellow_tripdata
+  num_workers: 2
+  cores_per_worker: 2
+  ram_per_worker_gb: 8
+  notes: Configuración base C1 para Ray
+
+# =========================
+#   SPARK - GOLD LEVEL
+# =========================
+G1:
+  step_name: silver_to_gold
+  framework: spark
+  operation_type: gold
+  dataset_name: yellow_tripdata
+  num_workers: 2
+  cores_per_worker: 2
+  ram_per_worker_gb: 8
+  notes: Paso gold Spark (limpieza + derivadas)
+
+# =========================
+#   ML TASK (XGBoost, etc.)
+# =========================
+ML1:
+  step_name: model_training
+  framework: spark
+  operation_type: ml
+  dataset_name: yellow_tripdata
+  num_workers: 2
+  cores_per_worker: 2
+  ram_per_worker_gb: 8
+  notes: Prueba inicial modelo ML sobre datos Gold

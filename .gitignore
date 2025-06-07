@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints
+
+# Entornos
+.env
+.venv/
+env/
+venv/
+
+# VSCode
+.vscode/
+
+# Archivos grandes o sensibles
+*.log
+*.db
+*.sqlite
+.DS_Store
+
+data/*
+!data/.gitkeep

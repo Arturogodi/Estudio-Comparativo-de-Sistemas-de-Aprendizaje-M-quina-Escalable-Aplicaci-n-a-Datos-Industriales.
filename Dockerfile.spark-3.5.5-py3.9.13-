@@ -1,0 +1,39 @@
+# Imagen base con Python 3.9.13
+FROM python:3.9.13-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar Java + herramientas necesarias
+RUN apt-get update && apt-get install -y \
+    openjdk-11-jdk \
+    wget \
+    curl \
+    procps \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Configurar variables de entorno de Java
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Definir versiones
+ENV SPARK_VERSION=3.5.5
+ENV HADOOP_VERSION=3
+
+# Configurar entorno de Spark
+ENV SPARK_HOME=/opt/spark
+ENV PATH=$SPARK_HOME/bin:$PATH
+
+# Descargar Spark
+RUN wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
+    tar -xzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -C /opt && \
+    mv /opt/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} /opt/spark && \
+    rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
+
+# Instalar PySpark
+RUN pip install pyspark==${SPARK_VERSION}
+
+# Instalar dependencias adicionales de Python para tus scripts
+RUN pip install pyyaml psutil pandas matplotlib seaborn
+
+# Por si quieres dejarlo en modo interactivo como Ray
+CMD ["tail", "-f", "/dev/null"]

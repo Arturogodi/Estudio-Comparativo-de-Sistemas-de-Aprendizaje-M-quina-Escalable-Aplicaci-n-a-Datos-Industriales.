@@ -1,0 +1,5 @@
+timestamp,operation,duration_seconds
+2025-05-05T20:52:35.962361,Spark - Cluster startup,64.79169607162476
+2025-05-05T20:53:39.083175,Spark - Cluster startup,4.746419429779053
+2025-05-05T20:53:40.967890,Spark - Crear DataFrame,1.8750357627868652
+2025-05-05T20:53:47.517624,Spark - Mostrar DataFrame,6.54219651222229
